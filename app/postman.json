@@ -1,0 +1,294 @@
+{
+  "info": {
+    "name": "LinkedIn Insights API",
+    "description": "API collection for LinkedIn Insights Microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get Page Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages/deepsolv?include_posts=true&include_employees=true&force_scrape=false",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages", "deepsolv"],
+          "query": [
+            {
+              "key": "include_posts",
+              "value": "true",
+              "description": "Include recent posts"
+            },
+            {
+              "key": "include_employees",
+              "value": "true",
+              "description": "Include employees"
+            },
+            {
+              "key": "force_scrape",
+              "value": "false",
+              "description": "Force rescrape from LinkedIn"
+            }
+          ]
+        },
+        "description": "Get complete page details. If not in DB, automatically scrapes from LinkedIn."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Search Pages by Filters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages?page=1&page_size=10",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages"],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            },
+            {
+              "key": "min_followers",
+              "value": "20000",
+              "disabled": true,
+              "description": "Minimum followers count"
+            },
+            {
+              "key": "max_followers",
+              "value": "40000",
+              "disabled": true,
+              "description": "Maximum followers count"
+            },
+            {
+              "key": "name",
+              "value": "tech",
+              "disabled": true,
+              "description": "Search by name"
+            },
+            {
+              "key": "industry",
+              "value": "software",
+              "disabled": true,
+              "description": "Search by industry"
+            }
+          ]
+        },
+        "description": "Search pages with filters: follower range, name, industry"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Search Pages by Follower Range",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages?min_followers=20000&max_followers=40000&page=1&page_size=10",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages"],
+          "query": [
+            {
+              "key": "min_followers",
+              "value": "20000"
+            },
+            {
+              "key": "max_followers",
+              "value": "40000"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Find pages with followers between 20k-40k"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Search Pages by Name",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages?name=deep&page=1&page_size=10",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages"],
+          "query": [
+            {
+              "key": "name",
+              "value": "deep"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Search pages by name (partial match)"
+      },
+      "response": []
+    },
+    {
+      "name": "5. Search Pages by Industry",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages?industry=software&page=1&page_size=10",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages"],
+          "query": [
+            {
+              "key": "industry",
+              "value": "software"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Search pages by industry"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get Page Posts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages/deepsolv/posts?limit=15",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages", "deepsolv", "posts"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "15",
+              "description": "Number of posts (max 50)"
+            }
+          ]
+        },
+        "description": "Get recent posts for a specific page"
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get Page Employees (Paginated)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages/deepsolv/employees?page=1&page_size=20",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages", "deepsolv", "employees"],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "20"
+            }
+          ]
+        },
+        "description": "Get employees/followers with pagination"
+      },
+      "response": []
+    },
+    {
+      "name": "8. Manually Scrape Page",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages/deepsolv/scrape?scrape_posts=true&scrape_employees=true",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages", "deepsolv", "scrape"],
+          "query": [
+            {
+              "key": "scrape_posts",
+              "value": "true"
+            },
+            {
+              "key": "scrape_employees",
+              "value": "true"
+            }
+          ]
+        },
+        "description": "Manually trigger scraping for a page"
+      },
+      "response": []
+    },
+    {
+      "name": "9. Delete Page",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/pages/deepsolv",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "pages", "deepsolv"]
+        },
+        "description": "Delete a page and all related data"
+      },
+      "response": []
+    },
+    {
+      "name": "10. Get Overall Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/stats",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "stats"]
+        },
+        "description": "Get database statistics"
+      },
+      "response": []
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check if API is running"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
